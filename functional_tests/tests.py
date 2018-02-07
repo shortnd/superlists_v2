@@ -1,11 +1,11 @@
 """Functional Test for Superlist App"""
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-import unittest
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.BROWSER = webdriver.Firefox()
 
@@ -20,7 +20,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_new_list_and_retrieve_it(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
-        self.BROWSER.get('http://localhost:8000')
+        self.BROWSER.get(self.live_server_url)
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.BROWSER.title)
